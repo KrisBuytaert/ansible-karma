@@ -11,6 +11,7 @@
   blockinfile:
     path: "{{ karma_configuration_file }}"
     block: "{{ karma_configuration | to_yaml }}"
+    create: yes
     owner: "{{ karma_system_user }}"
     group: "{{ karma_system_group }}"
     mode: 0644
