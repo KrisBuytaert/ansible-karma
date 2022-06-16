@@ -1,7 +1,7 @@
 ---
-- name: restart <<APPLICATION>>
+- name: restart karma
   become: true
   systemd:
     daemon_reload: true
-    name: <<APPLICATION>>
+    name: karma
     state: restarted

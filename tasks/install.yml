@@ -1,16 +1,38 @@
----
-- name: Create the <<APPLICATION>> group
+- name: Create the karma group
   group:
-    name: "{{ <<APPLICATION>>_system_group }}"
+    name: "{{ karma_system_group }}"
     state: present
     system: true
 
-- name: Create the <<APPLICATION>> user
+- name: Create the karma user
   user:
-    name: "{{ <<APPLICATION>>_system_user }}"
-    groups: "{{ <<APPLICATION>>_system_group }}"
+    name: "{{ karma_system_user }}"
+    groups: "{{ karma_system_group }}"
     append: true
     shell: /usr/sbin/nologin
     system: true
     createhome: false
     home: /
+
+- name: Generating karma executable name
+  set_fact:
+    karma_executable_name: "karma-linux-{{ go_arch_map[ansible_architecture] }}"
+
+- name: Downloading karma executable
+  unarchive:
+    src: "https://github.com/prymitive/karma/releases/download/{{ karma_version }}/{{ karma_executable_name }}.tar.gz"
+    remote_src: yes
+    dest: /usr/bin
+    mode: 0755
+    owner: root
+    group: root
+
+- name: Allow karma to bind port in SELinux
+  seport:
+    ports: "{{ karma_web_listen_port }}"
+    proto: tcp
+    setype: http_port_t
+    state: present
+  when:
+    - ansible_version.full is version('2.4', '>=')
+    - ansible_selinux.status == "enabled"

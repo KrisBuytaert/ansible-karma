@@ -1,9 +1,17 @@
----
-- name: Copy the <<APPLICATION>> systemd service file
+- name: Creating the karma systemd service file
   template:
-    src: <<APPLICATION>>.service.j2
-    dest: /etc/systemd/system/<<APPLICATION>>.service
+    src: karma.service.j2
+    dest: /etc/systemd/system/karma.service
     owner: root
     group: root
     mode: 0644
-  notify: restart <<APPLICATION>>
+  notify: restart karma
+
+- name: Creating karma confiuration
+  blockinfile:
+    path: "{{ karma_configuration_file }}"
+    block: "{{ karma_configuration | to_yaml }}"
+    owner: "{{ karma_system_user }}"
+    group: "{{ karma_system_group }}"
+    mode: 0644
+  notify: restart karma

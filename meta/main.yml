@@ -1,11 +1,11 @@
 ---
 galaxy_info:
-  author: <<AUTHOR>>
-  description: Deploy <<APPLICATION>>
-  role_name: <<APPLICATION>>
+  author: Kaloyan Kotlarski
+  description: Deploy karma dashboard
+  role_name: ansible-karma
   license: MIT
-  company: none
-  min_ansible_version: 2.7
+  company: StorPool Storage AD
+  min_ansible_version: 2.11
   platforms:
     - name: Ubuntu
       versions:
@@ -25,5 +25,6 @@ galaxy_info:
         - 31
   galaxy_tags:
     - monitoring
+    - dashboard
 
 dependencies: []

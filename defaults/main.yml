@@ -1,2 +1,3 @@
----
-<<APPLICATION>>_web_listen_address: "0.0.0.0:<<PORT>>"
+karma_version: "v0.103"
+karma_web_listen_address: "0.0.0.0"
+karma_web_listen_port: 8081
