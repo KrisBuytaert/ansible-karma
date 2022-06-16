@@ -14,13 +14,9 @@
     createhome: false
     home: /
 
-- name: Generating karma executable name
-  set_fact:
-    karma_executable_name: "karma-linux-{{ go_arch_map[ansible_architecture] }}"
-
 - name: Downloading karma executable
   unarchive:
-    src: "https://github.com/prymitive/karma/releases/download/{{ karma_version }}/{{ karma_executable_name }}.tar.gz"
+    src: "https://github.com/prymitive/karma/releases/download/{{ karma_version }}/karma-linux-{{ go_arch }}.tar.gz"
     remote_src: yes
     dest: /usr/bin
     mode: 0755
