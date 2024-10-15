@@ -11,4 +11,5 @@ go_arch: "{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }
 karma_system_user: "karma"
 karma_system_group: "karma"
 
+alertmanager_uri: "http://127.0.0.1:9093/"
 karma_configuration_file: "/etc/karma.yaml"
